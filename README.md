@@ -13,3 +13,4 @@
 3. Run your web app: `python run.py`
 
 4. Click the `PREVIEW` button to open the homepage
+[Image1](https://github.com/ThanhTung152/Project-2/blob/main/image/1.jpg)
