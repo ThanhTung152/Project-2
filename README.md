@@ -1,6 +1,6 @@
 # Disaster Response Pipeline Project
 
-### Instructions:
+## Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
@@ -12,5 +12,14 @@
 
 3. Run your web app: `python run.py`
 
-4. Click the `PREVIEW` button to open the homepage
-[Image1](https://github.com/ThanhTung152/Project-2/blob/main/image/1.jpg)
+4. Running on http://192.168.1.3:3001/
+
+## Result
+### Run ETL pipeline, ML pipeline and run file run.py
+![Image1](https://github.com/ThanhTung152/Project-2/blob/main/image/1.jpg)
+![Image2](https://github.com/ThanhTung152/Project-2/blob/main/image/2.jpg)
+![Image3](https://github.com/ThanhTung152/Project-2/blob/main/image/3.jpg)
+
+### Run Web
+![Image4](https://github.com/ThanhTung152/Project-2/blob/main/image/4.jpg)
+![Image5](https://github.com/ThanhTung152/Project-2/blob/main/image/5.jpg)
