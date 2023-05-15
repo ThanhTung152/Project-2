@@ -43,6 +43,9 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    top10_names = df.iloc[:, 4:14].columns
+    top10_counts = (df.iloc[:, 4:14]!=0).sum()
+    
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -63,7 +66,25 @@ def index():
                     'title': "Genre"
                 }
             }
-        }      
+        },
+        {
+            'data': [
+                Bar(
+                    x=top10_names,
+                    y=top10_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Distribution of Message Category',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category"
+                }
+            }
+        }
     ]
     
     # encode plotly graphs in JSON

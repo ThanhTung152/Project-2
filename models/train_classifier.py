@@ -19,11 +19,17 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer, T
 from sqlalchemy import create_engine
 
 def load_data(database_filepath):
+    """
+    INPUT:
+    database_filepath: filepath database  
+    
+    OUTPUT:
+    X: messages (input variable) 
+    y: categories of the messages (output variable)
+    category_names: category name for y
+    """
     engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table('InsertTableName', engine)
-
-    df.drop(columns='child_alone', inplace=True)
-    df = df[df.related <= 1]
     
     X = df['message']
     Y = df.iloc[:,4:]
@@ -31,7 +37,13 @@ def load_data(database_filepath):
     return X, Y, category_names
 
 def tokenize(text):
+    """
+    INPUT:
+    text: raw text
     
+    OUTPUT:
+    clean_tokens: tokenized messages
+    """    
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
     
@@ -44,6 +56,13 @@ def tokenize(text):
 
 
 def build_model(clf = AdaBoostClassifier()):
+    """
+    INPUT:
+    clf: classifier model 
+    
+    OUTPUT:
+    cv = ML model pipeline after performing grid search
+    """
     pipeline = Pipeline([
         ('features', FeatureUnion([
             ('text_pipeline', Pipeline([
@@ -65,11 +84,29 @@ def build_model(clf = AdaBoostClassifier()):
     return cv
     
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    INPUT:
+    model: Machine Learning model
+    X_test: test messages
+    y_test: categories for test messages
+    category_names: category name for y
+    
+    OUTPUT:
+    none - print scores (precision, recall, f1-score) for each output category of the dataset.
+    """
     Y_pred_test = model.predict(X_test)
     print(classification_report(Y_test.values, Y_pred_test, target_names=category_names))
     
 
 def save_model(model, model_filepath):
+    """
+    INPUT:
+    model: Machine Learning model
+    model_filepath: location to save the model
+    
+    OUTPUT:
+    none
+    """    
     with open(model_filepath, 'wb') as f:
         pickle.dump(model, f)
 
